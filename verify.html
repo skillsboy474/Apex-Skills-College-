@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Verify Certificate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: Arial; padding: 20px; }
+.box { border: 1px solid #aaa; padding: 20px; }
+</style>
+</head>
+
+<body>
+
+<h2>Apex Skills College – Certificate Verification</h2>
+
+<div class="box">
+<p><b>Certificate No:</b> <span id="serial"></span></p>
+<p><b>Name:</b> <span id="name"></span></p>
+<p><b>Course:</b> <span id="course"></span></p>
+<p><b>Date Completed:</b> <span id="date"></span></p>
+<p style="color:green;"><b>Status: VALID ✔</b></p>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById('serial').innerText = params.get('s');
+document.getElementById('name').innerText = params.get('n');
+document.getElementById('course').innerText = params.get('c');
+document.getElementById('date').innerText = params.get('d');
+</script>
+
+</body>
+</html>
