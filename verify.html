@@ -1,32 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Verify Certificate – Apex Skills College</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Verify Certificate — Apex Skills College</title>
 <style>
-body { font-family: Arial; padding: 20px; }
-.box { border: 1px solid #aaa; padding: 20px; border-radius: 8px; }
+  :root{
+    --bg:#f5f5f5;
+    --card:#ffffff;
+    --accent:#ffb300;
+    --muted:#666;
+    --border:#e6d6a3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#222;padding:18px}
+  .wrap{max-width:900px;margin:18px auto}
+
+  /* Certificate card */
+  .certificate{
+    background: linear-gradient(180deg, #fff 0%, #fff 100%);
+    border: 10px solid transparent;
+    border-image: linear-gradient(90deg, rgba(255,179,0,0.95), rgba(224,155,0,0.95)) 1;
+    border-radius:12px;
+    padding:28px;
+    box-shadow:0 14px 40px rgba(0,0,0,0.08);
+  }
+
+  .top{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .logo {
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo svg{width:86px;height:86px}
+  .issuer{
+    text-align:right;
+  }
+  .issuer h3{margin:0;font-size:16px;letter-spacing:0.6px}
+  .issuer p{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+  .title{ text-align:center;margin-top:18px }
+  .title h1{margin:0;font-size:26px;letter-spacing:0.6px}
+  .title p{margin:8px 0 0;color:var(--muted);font-size:14px}
+
+  .body{margin-top:22px;padding:12px 24px}
+  .body .present{ text-align:center;margin:18px 0 }
+  .body .present h2{margin:8px 0;font-size:22px}
+  .body .present .name{font-weight:800;font-size:20px;margin-top:8px}
+  .body .detail{max-width:720px;margin:6px auto;color:var(--muted);font-size:14px;text-align:center}
+
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:12px;flex-wrap:wrap}
+  .meta .left{font-size:14px;color:var(--muted)}
+  .meta .serial{font-weight:700;color:#222;background:#faf3da;padding:8px 10px;border-radius:8px;border:1px solid var(--border)}
+
+  /* signature area */
+  .sign-area{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px;flex-wrap:wrap}
+  .sign-left{max-width:60%}
+  .signature{
+    margin-top:8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight:700;
+    font-size:18px;
+    color:#222;
+  }
+  .sig-title{font-size:13px;color:var(--muted);margin-top:4px}
+
+  .qr-block{text-align:right}
+  .qr-block canvas{background:#fff;padding:6px;border-radius:6px;border:1px solid #eee}
+
+  .status{margin-top:14px;color:green;font-weight:700}
+
+  /* small / responsive */
+  @media (max-width:680px){
+    .issuer{text-align:left}
+    .meta{flex-direction:column;align-items:flex-start}
+    .sign-left{max-width:100%}
+    .qr-block{text-align:left;margin-top:12px}
+  }
+
+  /* print */
+  @media print{
+    body{background:#fff}
+    .wrap{margin:0}
+    .certificate{box-shadow:none;border-radius:0;padding:18mm}
+  }
 </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="certificate" role="main">
+      <div class="top">
+        <div class="logo" aria-hidden="true">
+          <!-- Modern minimal SVG logo (text + mark) -->
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apex Skills College logo">
+            <!-- circle mark -->
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#ffb300"/>
+                <stop offset="1" stop-color="#e09b00"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="108" height="108" rx="18" fill="url(#g1)"/>
+            <g transform="translate(20,18)" fill="#fff">
+              <path d="M6 48 L18 12 L30 48 Z" opacity="0.98"></path>
+              <rect x="36" y="28" width="8" height="24" rx="2"></rect>
+              <rect x="48" y="20" width="8" height="32" rx="2"></rect>
+            </g>
+          </svg>
+          <div>
+            <div style="font-weight:800;font-size:16px">Apex Skills College</div>
+            <div style="font-size:12px;color:var(--muted)">Professional Training & Certifications</div>
+          </div>
+        </div>
 
-<h2>Apex Skills College – Certificate Verification</h2>
+        <div class="issuer">
+          <h3>Apex Skills College</h3>
+          <p>Official Certification & Verification</p>
+        </div>
+      </div>
 
-<div class="box">
-<p><b>Certificate No:</b> <span id="serial"></span></p>
-<p><b>Name:</b> <span id="name"></span></p>
-<p><b>Course:</b> <span id="course"></span></p>
-<p><b>Date Completed:</b> <span id="date"></span></p>
-<p style="color:green;"><b>STATUS: VALID ✔</b></p>
-</div>
+      <div class="title">
+        <h1>Certificate of Completion</h1>
+        <p>This certificate is awarded to the recipient named below for successful completion of the stated course.</p>
+      </div>
+
+      <div class="body">
+        <div class="present">
+          <div style="font-size:13px;color:var(--muted)">This certifies that</div>
+          <div class="name" id="cert-name">—</div>
+          <div style="font-size:14px;margin-top:8px;color:var(--muted)">has successfully completed the course</div>
+          <div style="font-weight:700;font-size:16px;margin-top:6px" id="cert-course">—</div>
+        </div>
+
+        <div class="detail" id="cert-detail">Completion of the above course is verified by Apex Skills College. This digital certificate contains a unique serial and QR for verification.</div>
+
+        <div class="meta">
+          <div class="left">
+            <div>Issued by: <strong>Apex Skills College</strong></div>
+            <div style="margin-top:8px;color:var(--muted)">Date: <span id="cert-date">—</span></div>
+          </div>
+
+          <div class="serial" id="cert-serial">—</div>
+        </div>
+
+        <div class="sign-area">
+          <div class="sign-left">
+            <div class="signature">Professor Asim Iqbal Raza</div>
+            <div class="sig-title">Director</div>
+            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Authorized Signature</div>
+            <div class="status" id="verify-status" style="display:none">Status: VALID ✔</div>
+          </div>
+
+          <div class="qr-block">
+            <canvas id="qrCert" width="140" height="140" aria-hidden="true"></canvas>
+            <div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center">Scan to verify</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-document.getElementById('serial').innerText = params.get('s');
-document.getElementById('name').innerText = params.get('n');
-document.getElementById('course').innerText = params.get('c');
-document.getElementById('date').innerText = params.get('d');
+  // read url params and show them
+  const params = new URLSearchParams(window.location.search);
+  const s = params.get('s') || '—';
+  const n = params.get('n') ? decodeURIComponent(params.get('n')) : '—';
+  const c = params.get('c') ? decodeURIComponent(params.get('c')) : '—';
+  const d = params.get('d') ? decodeURIComponent(params.get('d')) : '—';
+
+  document.getElementById('cert-serial').innerText = s;
+  document.getElementById('cert-name').innerText = n;
+  document.getElementById('cert-course').innerText = c;
+  document.getElementById('cert-date').innerText = d;
+
+  // Show valid status
+  document.getElementById('verify-status').style.display = 'block';
+
+  // generate QR pointing to this same verification URL (so scanning opens this page)
+  (function(){
+    const fullUrl = window.location.href;
+    // QRious if available (index.html generates via qrious lib). But we can't guarantee library loaded here.
+    // So render a simple QR using an external tiny service as fallback-free approach is not allowed offline.
+    // We'll attempt QRious if present, otherwise use a free chart API.
+    function setCanvasFromDataURL(canvas, dataURL) {
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function(){
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.drawImage(img,0,0);
+      };
+      img.crossOrigin = "anonymous";
+      img.src = dataURL;
+    }
+
+    const canvas = document.getElementById('qrCert');
+    if(window.QRious){
+      new QRious({ element: canvas, size: 140, value: fullUrl });
+    } else {
+      // Use Google Chart API as fallback to get QR image (no library required)
+      const url = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + encodeURIComponent(fullUrl);
+      setCanvasFromDataURL(canvas, url);
+    }
+  })();
 </script>
 
 </body>
